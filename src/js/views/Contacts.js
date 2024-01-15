@@ -7,7 +7,8 @@ import { Modal } from "../component/Modal";
 
 export const Contacts = () => {
 	const [state, setState] = useState({
-		showModal: false
+		showModal: false,
+		contactIdToDelete: ""
 	});
 	const { store, actions } = useContext(Context); //esto lo agregamos. Siempre va a ser asi.
 
@@ -16,7 +17,10 @@ export const Contacts = () => {
 		actions.getAllContacts();
 	}, []);
 	console.log(store.contacts);
-
+	// funcion handlEliminar
+	function handleDelete() {
+		//actions.deleteContact(contact_id);
+	}
 	return (
 		<div className="container">
 			<div>
@@ -42,7 +46,11 @@ export const Contacts = () => {
 					</ul>
 				</div>
 			</div>
-			<Modal show={state.showModal} onClose={() => setState({ showModal: false })} />
+			<Modal
+				show={state.showModal}
+				onClose={() => setState({ showModal: false })}
+				onDelete={() => handleDelete()}
+			/>
 		</div>
 	);
 };
